@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_mysql pdo_pgsql mysqli zip
 
 # Enable Apache modules
-RUN a2enmod rewrite headers expires
+RUN a2enmod rewrite headers expires remoteip
 
 # Set working directory
 WORKDIR /var/www/html
@@ -33,7 +33,16 @@ RUN echo '<Directory /var/www/html>\n\
     Options Indexes FollowSymLinks\n\
     AllowOverride All\n\
     Require all granted\n\
-</Directory>' > /etc/apache2/conf-available/revive.conf \
+</Directory>\n\
+\n\
+# Trust Railway proxy for HTTPS detection\n\
+RemoteIPHeader X-Forwarded-For\n\
+RemoteIPTrustedProxy 10.0.0.0/8\n\
+RemoteIPTrustedProxy 172.16.0.0/12\n\
+RemoteIPTrustedProxy 192.168.0.0/16\n\
+\n\
+# Handle X-Forwarded-Proto for HTTPS detection\n\
+SetEnvIf X-Forwarded-Proto "https" HTTPS=on' > /etc/apache2/conf-available/revive.conf \
     && a2enconf revive \
     && echo "ServerName localhost" >> /etc/apache2/apache2.conf
 

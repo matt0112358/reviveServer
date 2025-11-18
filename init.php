@@ -16,6 +16,11 @@
  * A file to set up the environment for the administration interface.
  */
 
+// Fix for Railway proxy HTTPS detection
+if (file_exists(__DIR__ . '/proxy-fix.php')) {
+    require_once __DIR__ . '/proxy-fix.php';
+}
+
 require_once 'pre-check.php';
 require_once 'variables.php';
 require_once 'constants.php';
