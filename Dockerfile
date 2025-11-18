@@ -34,7 +34,8 @@ RUN echo '<Directory /var/www/html>\n\
     AllowOverride All\n\
     Require all granted\n\
 </Directory>' > /etc/apache2/conf-available/revive.conf \
-    && a2enconf revive
+    && a2enconf revive \
+    && echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # Configure PHP settings
 RUN echo "file_uploads = On\n\
