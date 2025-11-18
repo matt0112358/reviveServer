@@ -1,0 +1,43 @@
+# Revive Adserver specific
+var/*
+!var/.htaccess
+plugins/etc/*
+www/admin/plugins/*.zip
+www/images/stored/*
+
+# Configuration files with sensitive data
+var/config.inc.php
+var/config.php
+var/*.conf.php
+
+# Cache and temporary files
+var/cache/*
+var/templates_compiled/*
+var/plugins/*
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Zip files
+*.zip
